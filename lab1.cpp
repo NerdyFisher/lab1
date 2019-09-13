@@ -39,6 +39,7 @@ using namespace std;
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
 #include <GL/glx.h>
+#include "fonts.h"
 
 const int MAX_PARTICLES = 2000;
 const float GRAVITY     = 0.1;
@@ -207,6 +208,9 @@ void init_opengl(void)
 	glOrtho(0, g.xres, 0, g.yres, -1, 1);
 	//Set the screen background color
 	glClearColor(0.1, 0.1, 0.1, 1.0);
+    //Fonts
+    glEnable(GL_TEXTURE_2D);
+    initialize_fonts();
 }
 
 void makeParticle(int x, int y)
@@ -371,7 +375,13 @@ void render()
 	}
 	//
 	//Draw your 2D text here
-
+    
+    Rect r;
+    r.bot = g.yres - 405;
+    r.left = 400;
+    r.center = 0;
+    ggprint8b(&r, 16, 0x00ff0000, "Requirements");
+    
 
 
 
